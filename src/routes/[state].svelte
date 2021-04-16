@@ -11,7 +11,7 @@
 
     import TableContainer from '../components/TableContainer.svelte'
 
-    export let state;2
+    export let state;
 </script>
 
 <svelte:head>

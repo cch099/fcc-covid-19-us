@@ -4,9 +4,7 @@
     try {
       const usStats = await requests.usStats();
       return { usStats };
-    } catch (e) {
-      //console.log(e.description);
-    }
+    } catch (e) {}
   }
 </script>
 
@@ -14,7 +12,6 @@
   import CovidStat from "../components/CovidStat.svelte";
   import CovidChart from "../components/CovidChart.svelte";
   import TableContainer from "../components/TableContainer.svelte";
-
   export let usStats;
   console.log(usStats, "usStats");
 </script>
@@ -29,7 +26,7 @@
   </div>
 </div>
 
-<CovidStat />
+<CovidStat {...usStats} />
 
 <CovidChart />
 

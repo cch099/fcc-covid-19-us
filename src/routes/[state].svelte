@@ -1,27 +1,38 @@
 <script context="module">
-    import stateNames from '../data/stateNames.js'
-    export async function preload(page) {
-        const state = page.params["state"];
-        if (stateNames.find(s => s.abbreviation === state) === undefined) {
-          console.log("show this error");
-          this.error(404, "State not found");
-          return;
-        }
-        try {
-          return { state: page.params['state'] };
-        } catch (e) {
-          this.error(500, "There was an error in calling the api, please try again in 5 minutes.");
-        }
+  import stateNames from "../data/stateNames.js";
+  import requests from "../data/requests.js";
+
+  export async function preload(page) {
+    const state = page.params["state"];
+    if (stateNames.find(s => s.abbreviation === state) === undefined) {
+      console.log("should get error");
+      this.error(404, "State Not Found");
+      return;
     }
+
+    try {
+      const stats = await requests.stateStats(state);
+      return { state, stats };
+    } catch (e) {
+      console.log(e);
+      this.error(
+        500,
+        "There was an error in calling the api, please try again in 5 minutes."
+      );
+      return;
+    }
+  }
 </script>
+
 <script>
-    import CovidStat from '../components/CovidStat.svelte'
+  import CovidStat from "../components/CovidStat.svelte";
 
-    import CovidChart from '../components/CovidChart.svelte'
+  import CovidChart from "../components/CovidChart.svelte";
 
-    import TableContainer from '../components/TableContainer.svelte'
+  import TableContainer from "../components/TableContainer.svelte";
 
-    export let state;
+  export let state;
+  export let stats;
 </script>
 
 <svelte:head>
@@ -34,8 +45,6 @@
   </div>
 </div>
 
-<h1>{state}</h1>
-
-<CovidStat />
+<CovidStat {...stats} />
 
 <CovidChart />

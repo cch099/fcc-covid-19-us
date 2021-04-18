@@ -39,8 +39,22 @@ async function historicUS() {
   return parsers.historicUS(response.data);
 }
 
+async function historicState(state) {
+  const response = await axios.get(
+    'https://shrouded-shore-30649.herokuapp.com/https://covidtracking.com/api/v1/states/daily.json', {mode: 'no-cors',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+      'origin': 'x-requested-with'
+    }}
+  );
+
+  return parsers.historicState(state, response.data);
+}
+
 export default {
   usStats,
   stateStats,
   historicUS,
+  historicState,
 };

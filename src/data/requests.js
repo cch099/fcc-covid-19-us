@@ -15,6 +15,19 @@ async function usStats() {
   return parsers.usStats(response.data);
 }
 
+async function statesData() {
+  const response = await axios.get(
+    'https://shrouded-shore-30649.herokuapp.com/https://covidtracking.com/api/v1/states/current.json', {mode: 'no-cors',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+      'origin': 'x-requested-with'
+    }}
+  );
+
+  return parsers.stateTable(response.data);
+}
+
 async function stateStats(state) {
   const response = await axios.get(
     'https://shrouded-shore-30649.herokuapp.com/https://covidtracking.com/api/v1/states/current.json', {mode: 'no-cors',
@@ -57,4 +70,5 @@ export default {
   stateStats,
   historicUS,
   historicState,
+  statesData,
 };

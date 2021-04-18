@@ -2,6 +2,7 @@ import axios from 'axios';
 import parsers from './parsers';
 
 // Need reverse proxy from cors-anywhere (that's why we use herokuapp)
+// See https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe/43881141#43881141
 async function usStats() {
   const response = await axios.get(
     'https://shrouded-shore-30649.herokuapp.com/https://covidtracking.com/api/v1/us/current.json', {mode: 'no-cors',

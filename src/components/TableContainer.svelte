@@ -17,7 +17,7 @@
 
     if (sortBy !== "name") {
       return filteredStates.sort((a, b) => {
-        return +b[sortBy].replace(",", "") - +a[sortBy].replace(",", "");
+        return +(b[sortBy].replace(",", "")) - +(a[sortBy].replace(",", ""));
       });
     }
 
